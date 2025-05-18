@@ -1,0 +1,186 @@
+/* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Barra lateral izquierda */
+.contactos {
+  width: 20%; /* Ancho de la barra lateral */
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Usar toda la altura */
+}
+
+/* Sección superior: Contacto principal */
+.contacto-principal {
+  flex: 0 0 80px; /* Altura del contenedor */
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+/* Barra del usuario */
+.usuario-barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Foto del usuario */
+.foto-usuario img {
+  width: 40px; /* Tamaño de la foto */
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Información del usuario */
+.información-usuario {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem; /* Reducir el margen izquierdo */
+  flex: 1;
+}
+
+.nombre-usuario {
+  font-size: 0.9rem; /* Tamaño del texto del nombre */
+  font-weight: bold;
+  margin: 0;
+}
+
+.estado-usuario {
+  font-size: 0.8rem; /* Tamaño del texto del estado */
+  color: #777;
+  margin: 0;
+}
+
+/* Íconos */
+.iconos {
+  display: flex;
+  gap: 0.5rem; /* Espacio entre los íconos */
+}
+
+.iconos i {
+  font-size: 1rem; /* Tamaño de los íconos */
+  color: #555;
+  cursor: pointer;
+}
+
+.iconos i:hover {
+  color: #2d89ef;
+}
+
+/* Contenedor del botón */
+.nuevo-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+/* Botón de nuevo chat */
+.btn-nuevo-chat {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #9370DB; /* Color similar al de la imagen */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-nuevo-chat:hover {
+  background-color: #7a5db0; /* Color más oscuro al pasar el cursor */
+}
+
+/* Sección inferior: Lista de contactos */
+.lista-contactos {
+  flex: 2; /* Ocupa más espacio en la parte inferior */
+  overflow-y: auto; /* Habilitar scroll si hay más contactos */
+  padding: 1rem;
+}
+
+/* Estilo para cada contacto en la lista */
+.contacto {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.contacto:last-child {
+  border-bottom: none; /* Quitar borde del último contacto */
+}
+
+/* Foto del contacto */
+.contacto .foto-usuario img {
+  width: 40px; /* Tamaño de la foto del contacto */
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Información del contacto */
+.información-contacto {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.5rem;
+}
+
+.información-contacto .nombre {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.información-contacto .estado-contacto {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0;
+}
+
+/* Contenedor derecho principal */
+.contenido-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.contenido-principal img {
+  max-width: 200px;
+  margin-bottom: 1rem;
+}
+
+.contenido-principal p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: #555;
+}
+.enlace-conversación {
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Mantiene el color del texto */
+}
+.enlace-nuevo-chat {
+  text-decoration: none; /* Elimina el subrayado */
+  color: inherit; /* Mantiene el color del texto */
+}
