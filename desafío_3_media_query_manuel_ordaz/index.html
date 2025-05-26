@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda de Telecomunicaciones</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- Barra superior -->
+    <header class="barra-superior">
+      <span class="logo-barra">📡 Telecom Store</span>
+    </header>
+    <div class="container">
+      <nav class="menu">
+        <div class="logo"><h1>Telecom Store</h1></div>
+        <div class="barra-lateral">☰</div>
+        <div class="links">
+          <a href="#"><span class="icono"></span> Inicio</a>
+          <a href="#"><span class="icono"></span> Celulares</a>
+          <a href="#"><span class="icono"></span> Planes</a>
+          <a href="#"><span class="icono"></span> Accesorios</a>
+          <a href="#"><span class="icono"></span> Contacto</a>
+        </div>
+        <div class="carro-superior">
+          <span class="icono-carro">🛒</span>
+          <span id="contador-carro">0</span>
+        </div>
+      </nav>
+      <aside class="filtros">
+        <label for="orden">Ordenar por:</label>
+        <select id="orden">
+          <option value="precio">Precio</option>
+          <option value="marca">Marca</option>
+        </select>
+      </aside>
+      <main class="productos">
+        <div class="producto">
+          <img
+            src="./assets/img/motorolaE14.png"
+            alt="Smartphone Moto E14 4G 64GB Gris"
+          />
+          <p>Smartphone Moto E14 4G 64GB Gris</p>
+          <span class="precio">$89.990</span>
+          <button class="carro-btn" title="Agregar al carro">🛒</button>
+          <a
+            href="https://www.lider.cl/ip/telefonia/smartphone-moto-e14-4g-64gb-gris/00084002327046"
+            class="ver-mas-btn"
+            target="_blank"
+            >Ver más</a
+          >
+        </div>
+        <div class="producto">
+          <img src="./assets/img/planes.png" alt="Planes Wom" />
+          <p>Plan 10GB</p>
+          <span class="precio">$9.990</span>
+          <button class="carro-btn" title="Agregar al carro">🛒</button>
+          <a
+            href="https://store.wom.cl/planes/planes-portabilidad"
+            class="ver-mas-btn"
+            target="_blank"
+            >Ver más</a
+          >
+        </div>
+        <div class="producto">
+          <img
+            src="./assets/img/auricularesbluetooth.png"
+            alt="Auriculares Bluetooth"
+          />
+          <p>Auriculares Bluetooth</p>
+          <span class="precio">$59.990</span>
+          <button class="carro-btn" title="Agregar al carro">🛒</button>
+          <a
+            href="https://www.falabella.com/falabella-cl/product/142368983/Audifonos-Bluetooth-JBL-WAVE-200TWS-Negro/142368984"
+            class="ver-mas-btn"
+            target="_blank"
+            >Ver más</a
+          >
+        </div>
+        <div class="producto">
+          <img src="./assets/img/cargadortipoC.png" alt="cargador tipo C" />
+          <p>Cargador Tipo C</p>
+          <span class="precio">$29.990</span>
+          <button class="carro-btn" title="Agregar al carro">🛒</button>
+          <a
+            href="https://www.lider.cl/ip/audifonos-y-accesorios/cable-cargador-usb-a-tipo-c-2-4a-carga-rapida/00785881611758"
+            class="ver-mas-btn"
+            target="_blank"
+            >Ver más</a
+          >
+        </div>
+      </main>
+      <footer class="pie">
+        <p>© 2025 Telecom Store</p>
+        <div class="social">
+          <span>🌐</span>
+          <span>📷</span>
+        </div>
+      </footer>
+    </div>
+    <!-- Modal Carro -->
+    <div id="modalCarro" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar" id="cerrarModal">&times;</span>
+        <h2>Carro de Compras</h2>
+        <ul id="listaCarro"></ul>
+      </div>
+    </div>
+    <script>
+      // Carro de compras con cantidades
+      const carro = [];
+      const contadorCarro = document.getElementById("contador-carro");
+      const modal = document.getElementById("modalCarro");
+      const listaCarro = document.getElementById("listaCarro");
+      const cerrarModal = document.getElementById("cerrarModal");
+
+      // Crear y agregar el total y botón salir al modal
+      let totalDiv = document.createElement("div");
+      totalDiv.id = "totalCarro";
+      totalDiv.style.marginTop = "16px";
+      listaCarro.parentElement.appendChild(totalDiv);
+
+      let salirBtn = document.createElement("button");
+      salirBtn.textContent = "Salir";
+      salirBtn.style.marginTop = "12px";
+      salirBtn.onclick = () => (modal.style.display = "none");
+      listaCarro.parentElement.appendChild(salirBtn);
+
+      // Ocultar modal al inicio
+      modal.style.display = "none";
+
+      // Agregar producto al carro (sumar cantidad si ya existe)
+      document.querySelectorAll(".carro-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const producto = btn.parentElement;
+          const nombre = producto.querySelector("p").textContent;
+          const precio = producto.querySelector(".precio").textContent;
+          const precioNum = parseInt(precio.replace(/\D/g, ""));
+          const index = carro.findIndex(
+            (item) => item.nombre === nombre && item.precio === precio
+          );
+          if (index !== -1) {
+            carro[index].cantidad += 1;
+          } else {
+            carro.push({ nombre, precio, precioNum, cantidad: 1 });
+          }
+          actualizarContador();
+          mostrarCarro();
+          modal.style.display = "flex";
+        });
+      });
+
+      // Mostrar productos en el modal con botón eliminar y total
+      function mostrarCarro() {
+        listaCarro.innerHTML = "";
+        if (carro.length === 0) {
+          listaCarro.innerHTML = "<li>El carro está vacío.</li>";
+          totalDiv.textContent = "";
+        } else {
+          carro.forEach((item, idx) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <span>${item.nombre} - ${item.precio} (x${item.cantidad})</span>
+              <button class="eliminar-btn" data-idx="${idx}">Eliminar</button>
+            `;
+            listaCarro.appendChild(li);
+          });
+          // Botones eliminar
+          document.querySelectorAll(".eliminar-btn").forEach((btn) => {
+            btn.onclick = function () {
+              const idx = parseInt(this.getAttribute("data-idx"));
+              if (carro[idx].cantidad > 1) {
+                carro[idx].cantidad -= 1;
+              } else {
+                carro.splice(idx, 1);
+              }
+              actualizarContador();
+              mostrarCarro();
+            };
+          });
+          // Calcular y mostrar total
+          const total = carro.reduce(
+            (sum, item) => sum + item.precioNum * item.cantidad,
+            0
+          );
+          totalDiv.textContent = `Total: $${total.toLocaleString("es-CL")}`;
+        }
+      }
+
+      // Actualizar contador del carro
+      function actualizarContador() {
+        let total = carro.reduce((sum, item) => sum + item.cantidad, 0);
+        contadorCarro.textContent = total;
+      }
+
+      // Cerrar modal
+      cerrarModal.onclick = () => (modal.style.display = "none");
+      window.onclick = (e) => {
+        if (e.target == modal) modal.style.display = "none";
+      };
+
+      // Abrir modal al hacer click en el icono del carro
+      document.querySelector(".carro-superior").onclick = () => {
+        mostrarCarro();
+        modal.style.display = "flex";
+      };
+    </script>
+  </body>
+</html>
