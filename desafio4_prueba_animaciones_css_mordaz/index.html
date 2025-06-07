@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galería - Animaciones CSS</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <h1>Telco-Comunicación</h1>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#" id="contacto-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="contenido">
+      <!-- Ejemplo para tu galería -->
+      <section class="galeria" id="galeria">
+        <div class="imagen">
+          <img class="flotar" src="./assets/img/Captura de pantalla 2025-06-06 093930.png" alt="Imagen 1" />
+          <a href="https://es.wikipedia.org/wiki/Telecomunicaci%C3%B3n" target="_blank">¿Qué es telecomunicación?</a>
+        </div>
+        <div class="imagen">
+          <img class="pulso" src="./assets/img/joven-ingeniero-haciendo-analisis-programas_1303-20402.avif" alt="Imagen 2" />
+          <a href="https://es.wikipedia.org/wiki/Ingeniero" target="_blank">Sobre ingeniería</a>
+        </div>
+        <div class="imagen">
+          <img class="rebote" src="./assets/img/tecnico-solucionando-problemas-servidores.jpg" alt="Imagen 3" />
+          <a href="https://es.wikipedia.org/wiki/Servidor_inform%C3%A1tico" target="_blank">¿Qué es un servidor?</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; 2024 Telco-Comunicación - contacto@Telco_Comunicacion.com</p>
+      <div class="redes">
+        <a href="https://www.facebook.com/manuel.a.nunez.792" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/mordazn/" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/manuel-ordaz-011063104/" target="_blank">LinkedIn</a>
+      </div>
+    </footer>
+
+    <!-- Modal de contacto -->
+    <div id="modal-contacto" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar" id="cerrar-modal">&times;</span>
+        <h2>Contacto</h2>
+        <form>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required />
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" required></textarea>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const contactoLink = document.getElementById("contacto-link");
+      const modal = document.getElementById("modal-contacto");
+      const cerrar = document.getElementById("cerrar-modal");
+
+      contactoLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "flex";
+      });
+
+      cerrar.addEventListener("click", function () {
+        modal.style.display = "none";
+      });
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
